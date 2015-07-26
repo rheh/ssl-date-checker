@@ -1,0 +1,31 @@
+{
+  "name": "ssl-date-checker",
+  "version": "0.0.1",
+  "description": "Library to check and report on the start and expiration date of a given SSL certificate for a given domain.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --no-colors --recursive test"
+  },
+  "keywords": [
+    "SSL",
+    "SSL",
+    "checker",
+    "Certificate",
+    "expiry"
+  ],
+  "author": "Ray Hammond <ray.hammond77@gmail.com> (https://geeksretreat.wordpress.com/)",
+  "license": "MIT",
+  "preferGlobal": true,
+  "bin": {
+    "ssl-date-checker": "index.js"
+  },
+  "repository": "https://github.com/rheh/ssl-date-checker",
+  "devDependencies": {
+    "chai": "^2.1.2",
+    "jshint": "^2.6.3",
+    "lodash": "^3.6.0",
+    "mocha": "^2.2.1",
+    "mockery": "^1.4.0",
+    "sinon": "^1.15.4"
+  }
+}
