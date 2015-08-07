@@ -22,7 +22,7 @@
   "repository": "https://github.com/rheh/ssl-date-checker",
   "devDependencies": {
     "chai": "^2.1.2",
-    "jshint": "^2.6.3",
+    "jshint": "^2.8.0",
     "lodash": "^3.6.0",
     "mocha": "^2.2.1",
     "mockery": "^1.4.0",
