@@ -28,7 +28,7 @@ Checker.prototype.setHost = function (host) {
 
 Checker.prototype.setPort = function (port) {
 
-    var portVal = port || 443
+    var portVal = port || 443;
     var numericPort = (!isNaN(parseFloat(portVal)) && isFinite(portVal));
 
     if (numericPort === false) {
@@ -63,6 +63,6 @@ Checker.prototype.check = function (callback) {
     });
 
     req.end();
-}
+};
 
 module.exports = Checker;
