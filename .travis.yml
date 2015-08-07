@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "0.12"
+script: 
+  - "npm test --coverage"
+  - "jshint src"
+git:
+  depth: 10
+branches:
+  only:
+    - master
+before_install:
+  - "nvm use $TRAVIS_NODE_VERSION"
+  - "npm config set loglevel error"

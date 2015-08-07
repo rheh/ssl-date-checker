@@ -1,16 +1,29 @@
-# ssl-date-checker v0.0.1
+# ssl-date-checker v1.0.0
 Nodejs Library to check and report on the issues on and expiration date of a given SSL certificate for a given domain.
 
 Usage:
 
-$ ssl-date-checker npm.org
+$ ssl-date-checker host [-f text|json] [-p port]
 
 Example results:
+
+$ ssl-date-checker npm.org
 
 Certification for npm.org
 Issue On: Dec 13 00:51:56 2014 GMT
 Expires On: Jan 13 11:24:29 2017 GMT
 Expires in 536 days
+
+$ ssl-date-checker npm.org -f json
+
+Example results:
+
+{
+    "valid_from": "Oct 15 09:57:00 2014 GMT",
+    "valid_to": "Oct 16 09:57:00 2015 GMT",
+    "expires": 69,
+    "host": "iptorrents.com"
+}
 
 ## Installing
 
