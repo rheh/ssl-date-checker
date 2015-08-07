@@ -57,7 +57,8 @@ describe('#SSL Formatter functions ', function() {
 
             var expected = "Certification for " + host + "\n" + 
                 "Issue On: " + mock.valid_from + "\n" +
-                "Expires On: " + mock.valid_to;
+                "Expires On: " + mock.valid_to + "\n" +
+                "Expires in 0 days";
 
             var formatter = new ResultFormatter('text');
             formatter.format(host, mock).should.equal(expected);

@@ -59,7 +59,7 @@ ResultFormatter.prototype.format = function (host, dateInfo) {
          
         formattedResult = "Certification for " + host + "\n" +
             "Issue On: " + dateInfo.valid_from + "\n" +
-            "Expires On: " + dateInfo.valid_to;
+            "Expires On: " + dateInfo.valid_to + "\n" +
             "Expires in " + dhm(expires - new Date())[0] + " days";
 
     } else if (this.choosenFormat === JSON_FORMAT) {
@@ -72,6 +72,6 @@ ResultFormatter.prototype.format = function (host, dateInfo) {
     }
 
     return formattedResult;
-}
+};
 
 module.exports = ResultFormatter;
