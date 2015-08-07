@@ -1,4 +1,10 @@
 # ssl-date-checker v1.0.0
+
+[![Build Status][travis-image]][travis-url]
+[![Dependency Status][gemnasium-image]][gemnasium-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
+[![NPM version][npm-image]][npm-url]
+
 Nodejs Library to check and report on the issues on and expiration date of a given SSL certificate for a given domain.
 
 Usage:
