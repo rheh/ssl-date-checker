@@ -1,6 +1,6 @@
 {
   "name": "ssl-date-checker",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Library to check and report on the start and expiration date of a given SSL certificate for a given domain.",
   "main": "index.js",
   "scripts": {
@@ -8,10 +8,11 @@
   },
   "keywords": [
     "SSL",
-    "SSL",
     "checker",
     "Certificate",
-    "expiry"
+    "expiry",
+    "Secure Sockey Layer",
+    "TLS"
   ],
   "author": "Ray Hammond <ray.hammond77@gmail.com> (https://geeksretreat.wordpress.com/)",
   "license": "MIT",
