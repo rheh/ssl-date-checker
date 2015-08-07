@@ -1,4 +1,7 @@
 # ssl-date-checker v1.0.0
+
+[![Build Status](https://travis-ci.org/rheh/ssl-date-checker.svg?branch=master)](https://travis-ci.org/rheh/ssl-date-checker)
+
 Nodejs Library to check and report on the issues on and expiration date of a given SSL certificate for a given domain.
 
 Usage:
