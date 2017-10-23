@@ -53,12 +53,32 @@ describe('#SSL Formatter functions ', function() {
             formatter.format(host, mock).should.equal(JSON.stringify(mock, null, 4));
         });
 
-        it('Text format works', function() {
+        it('Text format works when valid', function() {
+            var mock = {
+                valid_from: 'Mon Oct 23 2016 19:59:39 GMT+0100 (BST)',
+                valid_to: 'Mon Mar 23 2018 19:59:39 GMT+0100 (BST)'
+            };
 
-            var expected = "Certification for " + host + "\n" + 
+            var expected = "Certification for " + host + "\n" +
                 "Issue On: " + mock.valid_from + "\n" +
                 "Expires On: " + mock.valid_to + "\n" +
-                "Expires in 0 days";
+                "Expires in 150 days\n";
+
+            var mockNow = 'Tue Oct 24 2017 11:59:39 GMT+0100 (BST)'
+            var formatter = new ResultFormatter('text');
+            formatter.format(host, mock, mockNow).should.equal(expected);
+        });
+
+        it('Text format works when expired', function() {
+            var mock = {
+                valid_from: 'Mon Oct 23 2011 19:59:39 GMT+0100 (BST)',
+                valid_to: 'Mon Mar 23 2012 19:59:39 GMT+0100 (BST)'
+            };
+
+            var expected = "Certification for " + host + "\n" +
+                "Issue On: " + mock.valid_from + "\n" +
+                "Expires On: " + mock.valid_to + "\n" +
+                "This has expired!\n";
 
             var formatter = new ResultFormatter('text');
             formatter.format(host, mock).should.equal(expected);

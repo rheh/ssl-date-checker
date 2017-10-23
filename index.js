@@ -16,7 +16,6 @@ var port = argv.p === true ? 443 : argv.p || 443;
 var checker = new Checker(host, port);
 
 checker.check(function (dateInfo) {
-
     var formatter = new ResultFormatter(format);
     var result = formatter.format(host, dateInfo);
     console.log(result);

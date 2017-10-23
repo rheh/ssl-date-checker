@@ -20,7 +20,7 @@ ResultFormatter.prototype.getFormat = function () {
     return this.choosenFormat;
 };
 
-ResultFormatter.prototype.format = function (host, dateInfo) {
+ResultFormatter.prototype.format = function (host, dateInfo, mockNow) {
 
     if ((this.choosenFormat === TEXT_FORMAT ||
         this.choosenFormat === JSON_FORMAT) === false) {
@@ -54,21 +54,21 @@ ResultFormatter.prototype.format = function (host, dateInfo) {
     }
 
     var expires = new Date(dateInfo.valid_to);
+    var now = mockNow ? new Date(mockNow) : new Date();
+    var days = dhm(expires - now)[0];
 
-    if (this.choosenFormat === TEXT_FORMAT) { 
-         
+    if (this.choosenFormat === TEXT_FORMAT) {
         formattedResult = "Certification for " + host + "\n" +
             "Issue On: " + dateInfo.valid_from + "\n" +
             "Expires On: " + dateInfo.valid_to + "\n" +
-            "Expires in " + dhm(expires - new Date())[0] + " days";
-
+            (days <= 0 ? "This has expired!" : "Expires in " + days + " days") +
+            "\n";
     } else if (this.choosenFormat === JSON_FORMAT) {
-
         dateInfo.expires = dhm(expires - new Date())[0];
+        dateInfo.expired = days <= 0;
         dateInfo.host = host;
 
         formattedResult = JSON.stringify(dateInfo, null, 4);
-
     }
 
     return formattedResult;
