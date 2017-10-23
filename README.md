@@ -25,6 +25,7 @@ Example results:
     "valid_from": "Oct 15 09:57:00 2014 GMT",
     "valid_to": "Oct 16 09:57:00 2015 GMT",
     "expires": 69,
+    "expired": false,
     "host": "iptorrents.com"
 }
 

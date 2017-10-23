@@ -43,7 +43,8 @@ Checker.prototype.check = function (callback) {
     var options = {
         host: this.host,
         port: this.port,
-        method: 'GET'
+        method: 'GET',
+        rejectUnauthorized: false
     };
 
     if (this.host === null || this.port === null) {
