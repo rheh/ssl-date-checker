@@ -24,7 +24,7 @@
   "devDependencies": {
     "chai": "^2.1.2",
     "jshint": "^2.8.0",
-    "lodash": "^3.6.0",
+    "lodash": "^4.17.15",
     "mocha": "^2.2.1",
     "mockery": "^1.4.0",
     "sinon": "^1.15.4"
