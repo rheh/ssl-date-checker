@@ -1,6 +1,8 @@
 const https = require('https');
 const Checker = require('../src/Checker');
 
+jest.mock('https');
+
 describe('#Checker enforces valid host and port', () => {
   let testContext;
 
@@ -71,19 +73,6 @@ describe('#Checker enforces valid host and port', () => {
       checker.setPort(8443);
       expect(checker.getHost()).toBe('npm.org');
       expect(checker.getPort()).toBe(8443);
-    });
-  });
-
-  describe('Request called', () => {
-    it('Https request invoked', () => {
-      const spy = jest.spyOn(https, 'request');
-      const checker = new Checker('google.com', 443);
-      checker.setHost('npm.org');
-      checker.setPort(8443);
-
-      checker.check();
-
-      expect(spy).toHaveBeenCalled();
     });
   });
 });
