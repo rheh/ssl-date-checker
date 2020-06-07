@@ -2,8 +2,7 @@ language: node_js
 node_js:
   - "10"
 script: 
-  - "npm test --coverage"
-  - "jshint src"
+  - "npm test"
 git:
   depth: 10
 branches:
