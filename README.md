@@ -1,4 +1,4 @@
-# ssl-date-checker v1.0.3
+# ssl-date-checker v2.0.0
 
 [![Build Status](https://travis-ci.org/rheh/ssl-date-checker.svg?branch=master)](https://travis-ci.org/rheh/ssl-date-checker)
 
