@@ -13,37 +13,43 @@ describe('#Checker enforces valid host and port', () => {
   describe('Data validation', () => {
     it('throws an Exception when passing nothing', () => {
       expect(function() {
-        const checker = new Checker();
+        const checker = Checker.setHost();
       }).toThrow(Error, 'Invalid host');
     });
 
     it('Defaults port when port not passed', () => {
-      const checker = new Checker('google.com');
+      const checker = Checker.setHost('google.com');
       expect(checker.getPort()).toBe(443);
     });
 
     it('throws an Exception when setting host to nothing', () => {
       expect(function() {
-        const checker = new Checker('google.com');
+        const checker = Checker.setHost('google.com');
         checker.setHost(null);
       }).toThrow(Error, 'Invalid host');
     });
 
     it('throws an Exception when setting port to a string', () => {
       expect(function() {
-        const checker = new Checker('google.com', 'fred');
+        const checker = Checker
+          .setHost('google.com')
+          .setPort('fred');
       }).toThrow(Error, 'Invalid port');
     });
 
     it('throws an Exception when setting port to a object', () => {
       expect(function() {
-        const checker = new Checker('google.com', {});
+        const checker = Checker
+          .setHost('google.com')
+          .setPort({});
       }).toThrow(Error, 'Invalid port');
     });
 
     it('throws an Exception when setting port to a function', () => {
       expect(function() {
-        const checker = new Checker('google.com', function() {});
+        const checker = Checker
+          .setHost('google.com')
+          .setPort(function() {});
       }).toThrow(Error, 'Invalid port');
     });
 
@@ -51,7 +57,7 @@ describe('#Checker enforces valid host and port', () => {
         'throws an Exception when check called without input parameters set',
         () => {
           expect(function() {
-            const checker = new Checker('geeksretreat.com');
+            const checker = Checker;
             checker.host = null;
             checker.port = null;
             checker.check();
@@ -62,13 +68,18 @@ describe('#Checker enforces valid host and port', () => {
 
   describe('Setters and Getters work', () => {
     it('Constructor variables stored and recalled', () => {
-      const checker = new Checker('google.com', 443);
+      const checker = Checker
+        .setHost('google.com')
+        .setPort(443);
       expect(checker.getHost()).toBe('google.com');
       expect(checker.getPort()).toBe(443);
     });
 
     it('Setter stored and recalled', () => {
-      const checker = new Checker('google.com', 443);
+      const checker = Checker
+        .setHost('google.com')
+        .setPort(443);
+        
       checker.setHost('npm.org');
       checker.setPort(8443);
       expect(checker.getHost()).toBe('npm.org');

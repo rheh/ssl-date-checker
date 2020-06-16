@@ -35,7 +35,7 @@ Example results:
 
 ## Installing
 
-`npm install ssl-date-checker`
+`npm install -g ssl-date-checker`
 
 ## Contributors
 

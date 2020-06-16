@@ -1,6 +1,6 @@
 {
   "name": "ssl-date-checker",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Library to check and report on the start and expiration date of a given SSL certificate for a given domain.",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "license": "MIT",
   "preferGlobal": true,
   "bin": {
-    "ssl-date-checker": "index.js"
+    "ssl-date-checker": "bin/index.js"
   },
   "repository": "https://github.com/rheh/ssl-date-checker",
   "devDependencies": {

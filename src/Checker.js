@@ -1,8 +1,6 @@
 const https = require('https');
-
-const Checker = function(host, port) {
-  this.setHost(host);
-  this.setPort(port);
+const Checker = function() {
+  this.port = 443;
 };
 
 Checker.prototype.getHost = function() {
@@ -19,6 +17,8 @@ Checker.prototype.setHost = function(host) {
   }
 
   this.host = host;
+
+  return this;
 };
 
 Checker.prototype.setPort = function(port) {
@@ -30,6 +30,8 @@ Checker.prototype.setPort = function(port) {
   }
 
   this.port = portVal;
+
+  return this;
 };
 
 Checker.prototype.check = function(callback) {
@@ -45,6 +47,10 @@ Checker.prototype.check = function(callback) {
   }
 
   const req = https.request(options, function(res) {
+    res.on('data', (d) => {
+      process.stdout.write(d);
+    });
+
     const certificateInfo = res.connection.getPeerCertificate();
 
     const dateInfo = {
@@ -52,10 +58,14 @@ Checker.prototype.check = function(callback) {
       valid_to: certificateInfo.valid_to,
     };
 
-    callback(dateInfo);
+    callback(null, dateInfo);
+  });
+
+  req.on('error', (e) => {
+    callback(e);
   });
 
   req.end();
 };
 
-module.exports = Checker;
+module.exports = new Checker();
