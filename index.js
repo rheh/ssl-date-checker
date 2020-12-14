@@ -1,3 +1,1 @@
-const Checker = require('./src/Checker');
-
-module.exports = Checker;
+module.exports = require('./src/checker');

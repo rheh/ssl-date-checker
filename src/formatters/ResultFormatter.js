@@ -1,5 +1,3 @@
-const https = require('https');
-
 const TEXT_FORMAT = 'text';
 const JSON_FORMAT = 'json';
 
@@ -17,8 +15,7 @@ ResultFormatter.prototype.getFormat = function() {
 };
 
 ResultFormatter.prototype.format = function(host, dateInfo, mockNow) {
-  if ((this.chosenFormat === TEXT_FORMAT ||
-        this.chosenFormat === JSON_FORMAT) === false) {
+  if ((this.chosenFormat === TEXT_FORMAT || this.chosenFormat === JSON_FORMAT) === false) {
     throw new Error('Invalid format, options text or json');
   }
 
@@ -54,11 +51,12 @@ ResultFormatter.prototype.format = function(host, dateInfo, mockNow) {
   const days = dhm(expires - now)[0];
 
   if (this.chosenFormat === TEXT_FORMAT) {
-    formattedResult = 'Certification for ' + host + '\n' +
-            'Issue On: ' + dateInfo.valid_from + '\n' +
-            'Expires On: ' + dateInfo.valid_to + '\n' +
-            (days <= 0 ? 'This has expired!' : 'Expires in ' + days + ' days') +
-            '\n';
+    const daysText = days <= 0 ? 'This has expired!' : 'Expires in ' + days + ' days';
+
+    formattedResult = `Certification for ${host}\n` +
+            `Issue On: ${dateInfo.valid_from}\n`+
+            `Expires On: ${dateInfo.valid_to}\n` +
+            `${daysText}\n`;
   } else if (this.chosenFormat === JSON_FORMAT) {
     dateInfo.expires = dhm(expires - new Date())[0];
     dateInfo.expired = days <= 0;

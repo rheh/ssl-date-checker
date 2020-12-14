@@ -1,71 +1,62 @@
+/* eslint-disable require-jsdoc */
 const https = require('https');
-const Checker = function() {
-  this.port = 443;
-};
 
-Checker.prototype.getHost = function() {
-  return this.host;
-};
-
-Checker.prototype.getPort = function() {
-  return this.port;
-};
-
-Checker.prototype.setHost = function(host) {
-  if (!host) {
+function checkHost(newHost) {
+  if (!newHost) {
     throw new Error('Invalid host');
   }
 
-  this.host = host;
+  return true;
+}
 
-  return this;
-};
-
-Checker.prototype.setPort = function(port) {
-  const portVal = port || 443;
+function checkPort(newPort) {
+  const portVal = newPort || 443;
   const numericPort = (!isNaN(parseFloat(portVal)) && isFinite(portVal));
 
   if (numericPort === false) {
     throw new Error('Invalid port');
   }
 
-  this.port = portVal;
+  return true;
+}
 
-  return this;
-};
-
-Checker.prototype.check = function(callback) {
-  const options = {
-    host: this.host,
-    port: this.port,
-    method: 'GET',
-    rejectUnauthorized: false,
-  };
-
-  if (this.host === null || this.port === null) {
+async function checker(host, port) {
+  if (host === null || port === null) {
     throw new Error('Invalid host or port');
   }
 
-  const req = https.request(options, function(res) {
-    res.on('data', (d) => {
-      process.stdout.write(d);
-    });
+  checkHost(host);
+  checkPort(port);
 
-    const certificateInfo = res.connection.getPeerCertificate();
-
-    const dateInfo = {
-      valid_from: certificateInfo.valid_from,
-      valid_to: certificateInfo.valid_to,
+  return new Promise((resolve, reject) => {
+    const options = {
+      host,
+      port,
+      method: 'GET',
+      rejectUnauthorized: false,
     };
 
-    callback(null, dateInfo);
+    const req = https.request(options, function(res) {
+      res.on('data', (d) => {
+        // process.stdout.write(d);
+      });
+
+      const certificateInfo = res.connection.getPeerCertificate();
+
+      const dateInfo = {
+        valid_from: certificateInfo.valid_from,
+        valid_to: certificateInfo.valid_to,
+      };
+
+      resolve(dateInfo);
+    });
+
+    req.on('error', (e) => {
+      reject(e);
+    });
+
+    req.end();
   });
+}
 
-  req.on('error', (e) => {
-    callback(e);
-  });
-
-  req.end();
-};
-
-module.exports = new Checker();
+module.exports = checker;

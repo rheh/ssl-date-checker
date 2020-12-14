@@ -1,9 +1,9 @@
 const https = require('https');
-const Checker = require('../src/Checker');
+const checker = require('../src/checker');
 
 jest.mock('https');
 
-describe('#Checker enforces valid host and port', () => {
+describe('#checker enforces valid host and port', () => {
   let testContext;
 
   beforeAll(() => {
@@ -12,78 +12,39 @@ describe('#Checker enforces valid host and port', () => {
 
   describe('Data validation', () => {
     it('throws an Exception when passing nothing', () => {
-      expect(function() {
-        const checker = Checker.setHost();
-      }).toThrow(Error, 'Invalid host');
+      expect(async function() {
+        await checker(null, null).rejects.toMatch('Invalid host');
+      });
     });
 
-    it('Defaults port when port not passed', () => {
-      const checker = Checker.setHost('google.com');
-      expect(checker.getPort()).toBe(443);
+    it('throws an Exception when passing undefined host', () => {
+      expect(async function() {
+        await checker(undefined, 443).rejects.toMatch('Invalid host');
+      });
     });
 
     it('throws an Exception when setting host to nothing', () => {
-      expect(function() {
-        const checker = Checker.setHost('google.com');
-        checker.setHost(null);
-      }).toThrow(Error, 'Invalid host');
+      expect(async function() {
+        await checker(null, 'google.com').rejects.toMatch('Invalid host');
+      });
     });
 
     it('throws an Exception when setting port to a string', () => {
-      expect(function() {
-        const checker = Checker
-          .setHost('google.com')
-          .setPort('fred');
-      }).toThrow(Error, 'Invalid port');
+      expect(async function() {
+        checker('google.com', 'fred').rejects.toMatch('Invalid port');
+      });
     });
 
     it('throws an Exception when setting port to a object', () => {
-      expect(function() {
-        const checker = Checker
-          .setHost('google.com')
-          .setPort({});
-      }).toThrow(Error, 'Invalid port');
+      expect(async function() {
+        await checker('google.com', {}).rejects.toMatch('Invalid port');
+      });
     });
 
     it('throws an Exception when setting port to a function', () => {
-      expect(function() {
-        const checker = Checker
-          .setHost('google.com')
-          .setPort(function() {});
-      }).toThrow(Error, 'Invalid port');
-    });
-
-    it(
-        'throws an Exception when check called without input parameters set',
-        () => {
-          expect(function() {
-            const checker = Checker;
-            checker.host = null;
-            checker.port = null;
-            checker.check();
-          }).toThrow(Error, 'Invalid host or port');
-        },
-    );
-  });
-
-  describe('Setters and Getters work', () => {
-    it('Constructor variables stored and recalled', () => {
-      const checker = Checker
-        .setHost('google.com')
-        .setPort(443);
-      expect(checker.getHost()).toBe('google.com');
-      expect(checker.getPort()).toBe(443);
-    });
-
-    it('Setter stored and recalled', () => {
-      const checker = Checker
-        .setHost('google.com')
-        .setPort(443);
-        
-      checker.setHost('npm.org');
-      checker.setPort(8443);
-      expect(checker.getHost()).toBe('npm.org');
-      expect(checker.getPort()).toBe(8443);
+      expect(async function() {
+        await checker('google.com').rejects.toMatch('Invalid port');
+      });
     });
   });
 });
