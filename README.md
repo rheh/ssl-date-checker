@@ -1,4 +1,4 @@
-# ssl-date-checker v2.0.3
+# ssl-date-checker v2.0.4
 
 Nodejs Library to check and report on the issues on and expiration date of a given SSL certificate for a given domain.
 
