@@ -1,6 +1,6 @@
 {
   "name": "ssl-date-checker",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Library to check and report on the start and expiration date of a given SSL certificate for a given domain.",
   "main": "index.js",
   "scripts": {
