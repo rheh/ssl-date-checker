@@ -1,5 +1,5 @@
 const https = require('https');
-const checker = require('../src/checker');
+const checker = require('../src/Checker');
 
 jest.mock('https');
 
