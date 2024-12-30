@@ -41,7 +41,7 @@ async function checker(host, port) {
         // process.stdout.write(d);
       });
 
-      const certificateInfo = res.connection.getPeerCertificate();
+      const certificateInfo = res.socket.getPeerCertificate();
 
       const dateInfo = {
         valid_from: certificateInfo.valid_from,
